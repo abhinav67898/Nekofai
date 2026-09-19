@@ -143,6 +143,9 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l4rv"]
+size = Vector2(50, 50)
+
 [node name="Player" type="CharacterBody2D" unique_id=579480993]
 script = ExtResource("1_4ntmi")
 
@@ -156,3 +159,9 @@ scale = Vector2(0.05824743, 0.058247425)
 sprite_frames = SubResource("SpriteFrames_c7s4x")
 animation = &"jump"
 frame_progress = 0.0026968452
+
+[node name="PickupArea" type="Area2D" parent="." unique_id=882383368]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=64089360]
+position = Vector2(319, 251)
+shape = SubResource("RectangleShape2D_1l4rv")
