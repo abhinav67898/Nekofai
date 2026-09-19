@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://byque4w54oowj" path="res://Player/player.tscn" id="1_fouwm"]
 [ext_resource type="Script" uid="uid://cmjpl7hfrvk15" path="res://Levels/death.gd" id="2_pg1p1"]
 [ext_resource type="Script" uid="uid://uydj402jl0as" path="res://Levels/score.gd" id="3_51s5j"]
+[ext_resource type="Script" uid="uid://bnu0j1f7d4g76" path="res://Levels/music_button.gd" id="4_eigo2"]
+[ext_resource type="AudioStream" uid="uid://cbyf15md8qcbr" path="res://assets/sounds/Other World - (320 Kbps).mp3" id="5_cowud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fouwm"]
 size = Vector2(129, 20)
@@ -258,6 +260,16 @@ offset_bottom = 51.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
 
+[node name="musicButton" type="Button" parent="Game UI" unique_id=554637934]
+offset_left = 563.0
+offset_top = 16.0
+offset_right = 631.0
+offset_bottom = 41.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Music: ON"
+script = ExtResource("4_eigo2")
+
 [node name="EndBarriers" type="StaticBody2D" parent="." unique_id=1758407882]
 
 [node name="Polygon2D" type="Polygon2D" parent="EndBarriers" unique_id=585562825]
@@ -276,3 +288,8 @@ polygon = PackedVector2Array(0, 0, 0, 360, -6, 360, -6, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EndBarriers2" unique_id=159956132]
 position = Vector2(-3, 180)
 shape = SubResource("RectangleShape2D_khnel")
+
+[node name="bgm" type="AudioStreamPlayer" parent="." unique_id=1229167687]
+stream = ExtResource("5_cowud")
+volume_db = -6.0
+autoplay = true

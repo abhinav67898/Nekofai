@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://4mc5o5h5lufa"
+path="res://.godot/imported/DJ FLG DILITACAO HIPNOTICA 6.0 (SLOWED & REVERB) - (320 Kbps).mp3-253554b546c3de02fa5dac02b30a2c11.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/DJ FLG DILITACAO HIPNOTICA 6.0 (SLOWED & REVERB) - (320 Kbps).mp3"
+dest_files=["res://.godot/imported/DJ FLG DILITACAO HIPNOTICA 6.0 (SLOWED & REVERB) - (320 Kbps).mp3-253554b546c3de02fa5dac02b30a2c11.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
