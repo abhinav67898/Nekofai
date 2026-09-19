@@ -5,8 +5,25 @@ const SPEED := 200.0
 const JUMP_VELOCITY := -450.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var pickupArea: Area2D = $PickupArea
-var held_box: RigidBody2D = null
+
+#respawn piosition
+var startPosition: Vector2
+
+func _ready() -> void: 
+	startPosition = global_position
+	
+func respawnPlayer() -> void:
+	global_position = startPosition
+	velocity = Vector2.ZERO
+	distanceScore = 0.0
+
+#distance ahh
+var distanceScore: float = 0.0
+var highScoreDistance: float = 0.0
+func updateDistance() -> void:
+	distanceScore = max(distanceScore, global_position.x - startPosition.x)
+	
+	highScoreDistance = max(highScoreDistance, distanceScore)
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -25,15 +42,13 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	# Apply movement
 	move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
-		
-		if collider is RigidBody2D:
-			collider.apply_central_impulse(-collision.get_normal() * 20.0)
-			
-	handlePickup()
+
+	#update disance
+	updateDistance()
+
+	# Update animations
 	update_animation()
 
 
@@ -41,10 +56,8 @@ func update_animation() -> void:
 	# Airborne animations
 	if not is_on_floor():
 		if velocity.y < 0:
-			# Moving upward
 			sprite.play("jump")
 		else:
-			# Moving downward
 			sprite.play("fall")
 
 	# Ground animations
@@ -57,24 +70,3 @@ func update_animation() -> void:
 	# Standing still
 	else:
 		sprite.play("idle")
-		
-		
-# Box Pickup function
-func handlePickup() -> void:
-	if not Input.is_action_just_pressed("pickup"):
-		return
-		
-	if held_box != null: 
-		held_box.global_position = global_position + Vector2(0,-20)
-		held_box.drop_box()
-		held_box = null
-		print("Box Dropped")
-		return
-	
-	for body in pickupArea.get_overlapping_bodies():
-		if body is RigidBody2D and body.has_method("pickup_box"):
-			held_box = body
-			held_box.pickup_box()
-			held_box.global_position = global_position + Vector2(0, -10)
-			break
-			

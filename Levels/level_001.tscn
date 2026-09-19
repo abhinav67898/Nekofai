@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cguenfbfexlwj"]
 
 [ext_resource type="PackedScene" uid="uid://byque4w54oowj" path="res://Player/player.tscn" id="1_fouwm"]
-[ext_resource type="PackedScene" uid="uid://ia3ply1cgbk8" path="res://box.tscn" id="1_pg1p1"]
+[ext_resource type="Script" uid="uid://cmjpl7hfrvk15" path="res://Levels/death.gd" id="2_pg1p1"]
+[ext_resource type="Script" uid="uid://uydj402jl0as" path="res://Levels/score.gd" id="3_51s5j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fouwm"]
 size = Vector2(129, 20)
@@ -18,10 +19,15 @@ size = Vector2(285, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1l4rv"]
 size = Vector2(64, 7)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1gp5"]
+size = Vector2(2746, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khnel"]
+size = Vector2(6, 360)
+
 [node name="Level001" type="Node2D" unique_id=217932147]
 
 [node name="Background" type="StaticBody2D" parent="." unique_id=9808333]
-visible = false
 
 [node name="Polygon2D" type="Polygon2D" parent="Background" unique_id=1536494685]
 scale = Vector2(2.3453124, 1)
@@ -213,9 +219,6 @@ scale = Vector2(0.49612412, 0.35)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 340, 0, 360, 129, 360, 129, 340)
 
-[node name="Box" parent="." unique_id=146871721 instance=ExtResource("1_pg1p1")]
-position = Vector2(100, 309)
-
 [node name="Player" parent="." unique_id=579480993 instance=ExtResource("1_fouwm")]
 position = Vector2(-258, 9)
 
@@ -225,3 +228,51 @@ limit_left = 0
 limit_top = 0
 limit_right = 1502
 limit_bottom = 360
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
+[node name="Death" type="Area2D" parent="." unique_id=1771758536]
+script = ExtResource("2_pg1p1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death" unique_id=2108956087]
+position = Vector2(1373, 378)
+shape = SubResource("RectangleShape2D_t1gp5")
+
+[node name="Game UI" type="CanvasLayer" parent="." unique_id=1221811695]
+
+[node name="SCORE" type="Label" parent="Game UI" unique_id=1027486079]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 68.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+script = ExtResource("3_51s5j")
+
+[node name="High scoer shit" type="Label" parent="Game UI" unique_id=1505511337]
+offset_left = 16.0
+offset_top = 28.0
+offset_right = 100.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="EndBarriers" type="StaticBody2D" parent="." unique_id=1758407882]
+
+[node name="Polygon2D" type="Polygon2D" parent="EndBarriers" unique_id=585562825]
+polygon = PackedVector2Array(0, 0, 0, 360, -6, 360, -6, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndBarriers" unique_id=1292887143]
+position = Vector2(-3, 180)
+shape = SubResource("RectangleShape2D_khnel")
+
+[node name="EndBarriers2" type="StaticBody2D" parent="." unique_id=1076563774]
+position = Vector2(1507, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="EndBarriers2" unique_id=1056844851]
+polygon = PackedVector2Array(0, 0, 0, 360, -6, 360, -6, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndBarriers2" unique_id=159956132]
+position = Vector2(-3, 180)
+shape = SubResource("RectangleShape2D_khnel")
